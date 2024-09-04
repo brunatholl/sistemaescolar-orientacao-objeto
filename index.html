@@ -5,10 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Envio Form PHP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <form action="api/core/utils.php" method="post" name="form_padrao" id="form_padrao" target="_blank">
+    
+    <a href="api/index.php" target="_blank">Sistema Escolar</a>
+    
+    <br>
+    <br>
+
+    <button onclick="processaDados()">Enviar Formulario</button>
+
+    <form action="api/core/utils.php" method="POST" name="form_padrao" id="form_padrao" target="_blank">
         <input type="hidden" name="usucodigo_logado">
         <input type="hidden" name="usulogin_logado">
         <input type="hidden" name="token_logado">
@@ -23,22 +32,20 @@
     </form>
 
     <script>
-        // -- javascript	
-        function processaDados(sParam) {
-            if (sParam) {
-                // Seta os parametros do formulario
-                addTokenUsuarioForm($("#form_padrao"));
+        // -- javascript
+        function processaDados() {
+            var sParam = "param ";
+            // Seta os parametros do formulario
+            addTokenUsuarioForm($("#form_padrao"));
 
-                $("#form_padrao").find('[name=usucodigo_logado]').val($("#usucodigo_logado").val());
-                $("#form_padrao").find('[name=token_logado]').val($("#token_logado").val());
-                $("#form_padrao").find('[name=modulo]').val("js");
-                $("#form_padrao").find('[name=file]').val("MINHA_PAGINA");
-                $("#form_padrao").find('[name=funcao]').val("processaDados");
-                $("#form_padrao").find('[name=param]').val(sParam);
+            $("#form_padrao").find('[name=usucodigo_logado]').val($("#usucodigo_logado").val());
+            $("#form_padrao").find('[name=token_logado]').val($("#token_logado").val());
+            $("#form_padrao").find('[name=file]').val("MINHA_PAGINA");
+            $("#form_padrao").find('[name=funcao]').val("processaDados");
+            $("#form_padrao").find('[name=param]').val(sParam);
 
-                // Envia o formulario
-                $("#form_padrao").submit();
-            }
+            // Envia o formulario
+            $("#form_padrao").submit();            
         }
 
         function addTokenUsuarioForm(form) {
@@ -58,6 +65,7 @@
         //      "nome": "Gelvazio Camargo",
         //      "senha": 1516239022
         // }
+
         function getTokenLogado() {
             return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2RpZ28iOiIxIiwibm9tZSI6IkdlbHZhemlvIENhbWFyZ28iLCJzZW5oYSI6MTUxNjIzOTAyMn0.TE_eyS5heu4ssy_5EGTHperqWIyXF6s1fKBG167-d-8";
         }

@@ -1,22 +1,6 @@
 <?php
 require_once("../core/header.php");
 
-// echo '<h1>CONSULTA DE PROFESSOR!</h1>';
-
-// <?php
-
-function getAcaoExcluirProfessor($codigoProfessor){
-    $sHTML = "<a id='acaoExcluir' href='http://localhost/" . getNomePastaSistema() . "/api/professor/cadastrar_professor.php?ACAO=EXCLUIR&codigo=" . $codigoProfessor . "'>Excluir</a>";
-
-    return $sHTML;
-}
-
-function getAcaoAlterarProfessor($codigoProfessor){
-    $sHTML = "<a id='acaoAlterar' href='http://localhost/" . getNomePastaSistema() . "/api/professor/cadastrar_professor.php?ACAO=ALTERAR&codigo=" . $codigoProfessor . "'>Alterar</a>";
-    return $sHTML;
-}
-
-
 $htmlTabelaProfessor = "<h3 style='text-align:center;'>CONSULTA DE PROFESSOR</h3>";
 
 $htmlTabelaProfessor .= "<a href='professor.php'><button class='button' type='button'>Incluir<button></a>";
@@ -70,11 +54,11 @@ foreach($arDadosProfessor as $aDados){
     $codigoProfessor = $aDados["codigo"];
 
     $htmlTabelaProfessor .= '<td>';
-    $htmlTabelaProfessor .= getAcaoExcluirProfessor($codigoProfessor);
+    $htmlTabelaProfessor .= getAcaoExcluir('professor', $codigoProfessor);
     $htmlTabelaProfessor .= '</td>';
 
     $htmlTabelaProfessor .= '<td>';
-    $htmlTabelaProfessor .= getAcaoAlterarProfessor($codigoProfessor);
+    $htmlTabelaProfessor .= getAcaoAlterar('professor', $codigoProfessor);
     $htmlTabelaProfessor .= '</td>';
 
 

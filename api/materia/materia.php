@@ -43,8 +43,8 @@ function getDadosMateria($codigoMateriaAlterar){
         $codigoAtual = $aDados["codigo"];
         if($codigoMateriaAlterar == $codigoAtual){
             $encontrouMateria = true;            
-            $turma       = $aDados["turma"];
-            $nome         = $aDados["nome"];
+            $turma = $aDados["turma"];
+            $nome  = $aDados["nome"];
             break;
         }
     }
@@ -57,7 +57,6 @@ function getDadosMateria($codigoMateriaAlterar){
     );
 }
 
-// Verificar se existe acao
 $codigoMateria = "";
 $turma = "";
 $nome = "";

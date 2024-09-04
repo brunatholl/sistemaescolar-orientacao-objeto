@@ -1,4 +1,9 @@
 <?php
+// PROCESSAMENTO DA PAGINA
+// echo "<pre>" . print_r($_POST, true) . "</pre>";return true;
+// echo "<pre>" . print_r($_GET, true) . "</pre>";return true;
+
+
 function formataData($data){
     return implode('/', array_reverse(explode('-', $data)));
 
@@ -122,12 +127,16 @@ function incluir_registro($pagina){
 
 function alterar_registro($pagina){
 
-    $codigoAlterar = $_POST["codigo"];
+    $arDados = array();
     
     $dados = @file_get_contents("../" . $pagina . "/" . $pagina . ".json");
-    $arDados = json_decode($dados, true);
-
+    if($dados){
+        $arDados = json_decode($dados, true);
+    }
+        
     $arDadosNovo = array();
+    $codigoAlterar = $_POST["codigo"];
+
     foreach($arDados as $aDados){
         $codigoAtual = $aDados["codigo"];
         if($codigoAlterar == $codigoAtual){
@@ -257,5 +266,34 @@ function getTipoEnsino(){
         $tipo_ensino_superior
     );
 }
+
+// ACOES GENERICAS
+function getAcaoExcluir($pagina, $codigo){
+    $sHTML = "<a id='acaoExcluir' href='http://localhost/" . getNomePastaSistema() . "/api/" . $pagina . "/cadastrar_" . $pagina . ".php?ACAO=EXCLUIR&codigo=" . $codigo . "'>Excluir</a>";
+    return $sHTML;
+}
+
+function getAcaoAlterar($pagina, $codigo){
+    $sHTML = "<a id='acaoAlterar' href='http://localhost/" . getNomePastaSistema() . "/api/" . $pagina . "/cadastrar_" . $pagina . ".php?ACAO=ALTERAR&codigo=" . $codigo . "'>Alterar</a>";
+    return $sHTML;
+}
+
+function getDescricaoPorCodigo($codigo, $pagina, $nomeColuna){    
+    $arDadosTurmas = array();
+    $dadosTurmas = @file_get_contents("../" . $pagina . "/" . $pagina . ".json");
+    if($dadosTurmas){ 
+        $arDadosTurmas = json_decode($dadosTurmas, true);
+    }
+
+    $nome = "Nome invalido!";
+    foreach($arDadosTurmas as $aDados){
+        if($aDados["codigo"] == $codigo){
+            $nome = $aDados[$nomeColuna];
+        }
+    }
+
+    return $nome;    
+}
+
                 
                 

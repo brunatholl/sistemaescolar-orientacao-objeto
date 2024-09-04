@@ -1,33 +1,4 @@
 <?php
-
-function getNomeEscola($codigoEscola){    
-    $arDadosEscolas = array();
-    $dadosEscolas = @file_get_contents("../escola/escola.json");
-    if($dadosEscolas){
-        $arDadosEscolas = json_decode($dadosEscolas, true);
-    }
-
-    $nome = "Nome invalido!";
-    //  preencher com php - mais options de ESCOLA
-    foreach($arDadosEscolas as $aDados){
-        if($aDados["codigo"] == $codigoEscola){
-            $nome = $aDados["descricao"];
-        }
-    }
-
-    return $nome;    
-}
-
-function getAcaoExcluirTurma($codigo){
-    $sHTML = "<a id='acaoExcluir' href='http://localhost/" . getNomePastaSistema() . "/api/turma/cadastrar_turma.php?ACAO=EXCLUIR&codigo=" . $codigo . "'>Excluir</a>";
-    return $sHTML;
-}
-
-function getAcaoAlterarTurma($codigo){
-    $sHTML = "<a id='acaoAlterar' href='http://localhost/" . getNomePastaSistema() . "/api/turma/cadastrar_turma.php?ACAO=ALTERAR&codigo=" . $codigo . "'>Alterar</a>";
-    return $sHTML;
-}
-
 require_once("../core/header.php");
 
 echo '<h3 style="text-align:center;">CONSULTA DE TURMA</h3>';
@@ -66,7 +37,8 @@ foreach($arDadosTurmas as $aDados){
     $htmlTabelaTurmas .= "<td align='center'>" . $aDados["codigo"] . "</td>";
 
     $codigoEscola = $aDados["escola"];
-    $nomeEscola = getNomeEscola($codigoEscola);
+    $nomeEscola = getDescricaoPorCodigo($codigoEscola, "escola", $nomeColuna = "descricao");
+
     $htmlTabelaTurmas .= "<td align='left'>" . $nomeEscola . "</td>";
 
     $htmlTabelaTurmas .= "<td align='left'>" . $aDados["nome"] . "</td>";
@@ -79,11 +51,11 @@ foreach($arDadosTurmas as $aDados){
     $codigo = $aDados["codigo"];
 
     $htmlTabelaTurmas .= '<td>';
-    $htmlTabelaTurmas .= getAcaoExcluirTurma($codigo);
+    $htmlTabelaTurmas .= getAcaoExcluir('turma', $codigo);
     $htmlTabelaTurmas .= '</td>';
 
     $htmlTabelaTurmas .= '<td>';
-    $htmlTabelaTurmas .= getAcaoAlterarTurma($codigo);
+    $htmlTabelaTurmas .= getAcaoAlterar('turma', $codigo);
     $htmlTabelaTurmas .= '</td>';
 
     // FECHAR A LINHA ATUAL

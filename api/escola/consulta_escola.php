@@ -1,48 +1,9 @@
 <?php
-function getNomeCidade($codigoCidade){
-    $nomeCidade = 'cidade invalida';
-    switch($codigoCidade){
-        case 1:
-            $nomeCidade = 'Rio do Sul';
-            break;
-        case 2:
-            $nomeCidade = 'Ibirama';
-            break;
-        case 3:
-            $nomeCidade = 'Ituporanga';
-            break;                    
-        case 4:
-            $nomeCidade = 'Joinville';
-            break;
-        case 5:
-            $nomeCidade = 'Florianopolis';
-            break;
-        case 6:
-            $nomeCidade = 'Blumenau';
-            break;
-    }
-
-    return $nomeCidade;
-}
-
-function getAcaoExcluirEscola($codigoEscola){
-    $sHTML = "<a id='acaoExcluir' href='http://localhost/" . getNomePastaSistema() . "/api/Escola/cadastrar_escola.php?ACAO=EXCLUIR&codigo=" . $codigoEscola . "'>Excluir</a>";
-
-    return $sHTML;
-}
-
-function getAcaoAlterarEscola($codigoEscola){
-    $sHTML = "<a id='acaoAlterar' href='http://localhost/" . getNomePastaSistema() . "/api/Escola/cadastrar_escola.php?ACAO=ALTERAR&codigo=" . $codigoEscola . "'>Alterar</a>";
-
-    return $sHTML;
-}
-
 require_once("../core/header.php");
 
 echo '<h3 style="text-align:center;">CONSULTA DE ESCOLA</h3>';
 
 $htmlTabelaEscolas = "<a href='escola.php' target='_blank'><button class='button' type='button'>Incluir<button></a>";
-
 
 $htmlTabelaEscolas .= "<table border='1'>";
 
@@ -87,7 +48,7 @@ foreach($arDadosEscolas as $aDados){
     $htmlTabelaEscolas .= "<td>" . $aDados["descricao"] . "</td>";
 
     $codigoCidade = $aDados["cidade"];
-    $nomeCidade = getNomeCidade($codigoCidade);
+    $nomeCidade = getDescricaoPorCodigo($codigoCidade, "cidade", $nomeColuna = "descricao");
 
     $htmlTabelaEscolas .= "<td>" . $nomeCidade . "</td>";
 
@@ -95,11 +56,11 @@ foreach($arDadosEscolas as $aDados){
     $codigoEscola = $aDados["codigo"];
 
     $htmlTabelaEscolas .= '<td>';
-    $htmlTabelaEscolas .= getAcaoExcluirEscola($codigoEscola);
+    $htmlTabelaEscolas .= getAcaoExcluir('escola', $codigoEscola);
     $htmlTabelaEscolas .= '</td>';
 
     $htmlTabelaEscolas .= '<td>';
-    $htmlTabelaEscolas .= getAcaoAlterarEscola($codigoEscola);
+    $htmlTabelaEscolas .= getAcaoAlterar('escola', $codigoEscola);
     $htmlTabelaEscolas .= '</td>';
 
     // FECHAR A LINHA ATUAL

@@ -1,34 +1,8 @@
 <?php
 require_once("../core/header.php");
 
-function getAcaoExcluirAluno($codigoAluno){
-    $sHTML = "<a id='acaoExcluir' href='http://localhost/" . getNomePastaSistema() . "/api/aluno/cadastrar_aluno.php?ACAO=EXCLUIR&codigo=" . $codigoAluno . "'>Excluir</a>";
-
-    return $sHTML;
-}
-
-function getAcaoAlterarAluno($codigoAluno){
-    $sHTML = "<a id='acaoAlterar' href='http://localhost/" . getNomePastaSistema() . "/api/aluno/cadastrar_aluno.php?ACAO=ALTERAR&codigo=" . $codigoAluno . "'>Alterar</a>";
-
-    return $sHTML;
-}
-
-
 echo '<h3 style="text-align:center;">CONSULTA DE ALUNO</h3>';
 
-// JAVASCRIPT
-$htmlTabelaAlunos = "
-    <script>
-        function abreCadastroInclusao(){
-            // alert('Abrindo cadastro de inclusao de aluno...');
-            window.location.href = 'aluno.php';
-        }
-    </script>
-";
-
-// $htmlTabelaAlunos .= "<button class='button' type='button' onclick='abreCadastroInclusao()'>Incluir - JAVASCRIPT<button>";
-
-// $htmlTabelaAlunos .= "<a href='aluno.php' target='_blank'><button class='button' type='button'>Incluir<button></a>";
 $htmlTabelaAlunos .= "<a href='aluno.php'><button class='button' type='button'>Incluir<button></a>";
 
 $htmlTabelaAlunos .= "<table border='1'>";
@@ -50,11 +24,7 @@ $htmlTabelaAlunos .= "</head>";
 // CORPO DA TABELA
 $htmlTabelaAlunos .= "<tbody>";
 
-// LINHAS DA TABELA
-// LER OS DADOS DO ARQUIVO
 $arDadosAlunos = array();
-// Primeiro, verifica se existe dados no arquivo json
-// @ na frente do metodo, remove o warning
 $dadosAlunos = @file_get_contents("aluno.json");
 if($dadosAlunos){
     // transforma os dados lidos em ARRAY, que estavam em JSON
@@ -66,11 +36,6 @@ foreach($arDadosAlunos as $aDados){
 
     // ABRIR UMA NOVA LINHA
     $htmlTabelaAlunos .= "<tr>";
-    
-    // COLUNAS DENTRO DA LINHA
-    // ALINHAMENTO
-    // TEXTO, ALINHADO A ESQUERDA
-    // VALORES, ALINHADOS A DIREITA
     $htmlTabelaAlunos .= "<td align='center'>" . $aDados["codigo"] . "</td>";
     $htmlTabelaAlunos .= "<td>" . $aDados["nome"] . "</td>";
     $htmlTabelaAlunos .= "<td>" . $aDados["email"] . "</td>";
@@ -80,20 +45,18 @@ foreach($arDadosAlunos as $aDados){
     $codigoAluno = $aDados["codigo"];
 
     $htmlTabelaAlunos .= '<td>';
-    $htmlTabelaAlunos .= getAcaoExcluirAluno($codigoAluno);
+    $htmlTabelaAlunos .= getAcaoExcluir('aluno', $codigoAluno);
     $htmlTabelaAlunos .= '</td>';
 
     $htmlTabelaAlunos .= '<td>';
-    $htmlTabelaAlunos .= getAcaoAlterarAluno($codigoAluno);
+    $htmlTabelaAlunos .= getAcaoAlterar('aluno', $codigoAluno);
     $htmlTabelaAlunos .= '</td>';
-
 
     // FECHAR A LINHA ATUAL
     $htmlTabelaAlunos .= "</tr>";
 }
 
 $htmlTabelaAlunos .= "</tbody>";
-
 $htmlTabelaAlunos .= "</table>";
 
 echo $htmlTabelaAlunos;
