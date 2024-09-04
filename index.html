@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    -- html
+    <form action="api/core/utils.php" method="post" name="form_padrao" id="form_padrao" target="_blank">
+        <input type="hidden" name="usucodigo_logado">
+        <input type="hidden" name="usulogin_logado">
+        <input type="hidden" name="token_logado">
+        <input type="hidden" name="lojcodigo_logado">
+        <input type="hidden" name="tpusu_logado">
+        <input type="hidden" name="modulo">
+        <input type="hidden" name="acesso">
+        <input type="hidden" name="file">
+        <input type="hidden" name="object">
+        <input type="hidden" name="funcao">
+        <input type="hidden" name="param">
+    </form>
+
+    <script>
+        // -- javascript	
+        function processaDados(sParam) {
+            if (sParam) {
+                // Seta os parametros do formulario
+                addTokenUsuarioForm($("#form_padrao"));
+
+                $("#form_padrao").find('[name=usucodigo_logado]').val(parent.getElement("#usucodigo_logado").val());
+                $("#form_padrao").find('[name=token_logado]').val(parent.getElement("#token_logado").val());
+                $("#form_padrao").find('[name=modulo]').val("js");
+                $("#form_padrao").find('[name=file]').val("MINHA_PAGINA");
+                $("#form_padrao").find('[name=funcao]').val("processaDados");
+                $("#form_padrao").find('[name=param]').val(sParam);
+
+                // Envia o formulario
+                $("#frm_csv").submit();
+            }
+        }
+
+        function addTokenUsuarioForm(form) {
+            if (form) {
+                if (form.find('[name=token_logado]').length == 0) {
+                    form.append('<input type="hidden" name="token_logado" id="token_logado">');
+                    form.find('[name=token_logado]').val(getTokenLogado());
+                } else {
+                    form.find('[name=token_logado]').val(getTokenLogado());
+                }
+            }
+        }
+
+        // payload
+        // {
+        //      "codigo": "1",
+        //      "nome": "Gelvazio Camargo",
+        //      "senha": 1516239022
+        // }
+        function getTokenLogado() {
+            return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2RpZ28iOiIxIiwibm9tZSI6IkdlbHZhemlvIENhbWFyZ28iLCJzZW5oYSI6MTUxNjIzOTAyMn0.TE_eyS5heu4ssy_5EGTHperqWIyXF6s1fKBG167-d-8";
+        }
+
+        function getTokenSistema() {
+            return "l:T@.P59iq5u";
+        }
+    </script>
+</body>
+
+</html>
