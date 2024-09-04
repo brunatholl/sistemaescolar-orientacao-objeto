@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Envio Form PHP</title>
 </head>
 
 <body>
-    -- html
     <form action="api/core/utils.php" method="post" name="form_padrao" id="form_padrao" target="_blank">
         <input type="hidden" name="usucodigo_logado">
         <input type="hidden" name="usulogin_logado">
@@ -30,15 +29,15 @@
                 // Seta os parametros do formulario
                 addTokenUsuarioForm($("#form_padrao"));
 
-                $("#form_padrao").find('[name=usucodigo_logado]').val(parent.getElement("#usucodigo_logado").val());
-                $("#form_padrao").find('[name=token_logado]').val(parent.getElement("#token_logado").val());
+                $("#form_padrao").find('[name=usucodigo_logado]').val($("#usucodigo_logado").val());
+                $("#form_padrao").find('[name=token_logado]').val($("#token_logado").val());
                 $("#form_padrao").find('[name=modulo]').val("js");
                 $("#form_padrao").find('[name=file]').val("MINHA_PAGINA");
                 $("#form_padrao").find('[name=funcao]').val("processaDados");
                 $("#form_padrao").find('[name=param]').val(sParam);
 
                 // Envia o formulario
-                $("#frm_csv").submit();
+                $("#form_padrao").submit();
             }
         }
 
