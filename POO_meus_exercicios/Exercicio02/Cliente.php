@@ -15,6 +15,7 @@ class Cliente {
         return "<br>Cadastro Pessoa Padrao.";
     }
 
+    // exemplos explicação professor
     private function calculaSalario(){
         return "Salario calculado!";
     }
