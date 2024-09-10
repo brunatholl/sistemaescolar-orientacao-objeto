@@ -1,7 +1,7 @@
 <?php 
 require_once("Cliente.php");
 
-class ClienteFisica extends Cliente {
+class ClienteJuridica extends Cliente {
 
     public $cnpj;
 

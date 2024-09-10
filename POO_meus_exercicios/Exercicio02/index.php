@@ -20,6 +20,11 @@ $oclienteFisica->exibir();
 
 
 // pessoa juridica
+$oclienteJuridica = new ClienteJuridica();
+$oclienteJuridica->nome="Bruna";
+$oclienteJuridica->cnpj="061.025.157-66";
+$oclienteJuridica->exibir();
+
 // cliente padrao
 
 /*

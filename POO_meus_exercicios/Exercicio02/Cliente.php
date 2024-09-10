@@ -8,11 +8,11 @@ class Cliente {
 
     public function exibir(){
         echo '<hr><br>Cliente: <br> Nome =  ' . $this->nome . ' <br> E-mail =  ' . $this->email . '<br>
-         Telefone =  ' . $this->telefone . ' <br> Pessoa: ' . $this->getPessoa();
+         Telefone =  ' . $this->telefone  . $this->getPessoa();
     }
 
     public function getPessoa(){
-        return "Cadastro Pessoa Padrao.";
+        return "<br>Cadastro Pessoa Padrao.";
     }
 
     private function calculaSalario(){
